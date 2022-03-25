@@ -37,7 +37,7 @@ public class Aluno {
     public float getFrequência() {
         return this.frequencia;
     }
-    public float getFrequenciaEmPorcentagem(){
+    public float frequenciaEmPorcentagem(){
         return this.frequencia/MAX_AULAS;
     }
     public double getDesempenho() {
@@ -53,7 +53,7 @@ public class Aluno {
     private void setCodTurma(String codTurma) {
             this.codTurma = codTurma;
     }
-    public void setNota(float nota) {
+    public void adicionarNota(float nota) {
         if(getNumProva()<MAX_ATIVIDADES && nota<MAX_NOTA_PROVA){
             this.nota[getNumProva()] = nota;
             this.setNumProva();
@@ -75,10 +75,10 @@ public class Aluno {
         }
     }
     public void atualizarDesempenho(){
-        this.desempenho = ((80*notaTotal())+(20*getFrequenciaEmPorcentagem()))/100;
+        this.desempenho = ((80*notaTotal())+(20*frequenciaEmPorcentagem()))/100;
     }
     public void atualizarAprovacao(){
-        if(this.notaTotal()>Aluno.MIN_NOTA_APROVACAO&&this.getFrequenciaEmPorcentagem()>Aluno.MIN_FREQUENCIA_APROVACAO){
+        if(this.notaTotal()>Aluno.MIN_NOTA_APROVACAO&&this.frequenciaEmPorcentagem()>Aluno.MIN_FREQUENCIA_APROVACAO){
             this.aprovado = true;
         } else {
             this.aprovado = false;

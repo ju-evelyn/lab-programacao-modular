@@ -83,7 +83,7 @@ public class Turma {
     public double mediaFrequenciaTurma(){
         double somaFrequenciaTotal = 0;
         for(int i = 0;i<this.getNumAlunos();i++){
-            somaFrequenciaTotal += this.alunos[i].getFrequenciaEmPorcentagem();
+            somaFrequenciaTotal += this.alunos[i].frequenciaEmPorcentagem();
         }
         return somaFrequenciaTotal/this.getNumAlunos();
     }
@@ -95,5 +95,8 @@ public class Turma {
             }
         }
         return destaque;
-    }  
+    }
+    public String toString(){
+        return "A turma "+this.getCodTurma()+"possui "+this.getNumAlunos()+" alunos e está no nível "+getNivel()+".";
+    }
 }

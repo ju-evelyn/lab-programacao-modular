@@ -1,36 +1,27 @@
-/**
- * pode conter até 20 alunos
- * atividades avaliativas tem o mesmo valor e somam 100 pontos
- * dividida por nível de ensino
- * código de turma com nível, dia da semana e turno da turma
- * uma aula por semana
- * semeste tem 20 semanas
- * ordem alfabética dos alunos com nome, nota e estado de aprovação
- * aluno destaque: nota(80%) e frequência (20%)
- */
-
 public class Turma {
-    private Aluno alunos[];
+    private Aluno[] alunos;
     private int numAlunos;
     private int nivel;
     private int diaDaSemana;
     private int turno;
     private String codTurma;
     public static final int MINIMO = 1;
-    public static final int DIA_MAXIMO = 7;
-    public static final int TURNO_MAXIMO = 3;
-    alunos[] = new Aluno[20];
+    public static final int MAX_DIA = 7;
+    public static final int MAX_TURNO = 3;
+    public static final int MAX_ALUNOS = 20;
     public Turma(){
         this.setNivel(MINIMO);
         this.setDiaDaSemana(MINIMO);
         this.setTurno(MINIMO);
         this.setCodTurma();
+        this.alunos = new Aluno[MAX_ALUNOS];
     }
     public Turma(int nivel, int diaDaSemana, int turno){
         this.setNivel(nivel);
         this.setDiaDaSemana(diaDaSemana);
         this.setTurno(turno);
         this.setCodTurma();
+        this.alunos = new Aluno[MAX_ALUNOS];
     }
     public Aluno getAlunos(int numAluno) {
         return alunos[numAluno];
@@ -50,36 +41,59 @@ public class Turma {
     public String getCodTurma() {
         return codTurma;
     }
-    public void setAlunos(Aluno aluno) {
-        if(getNumAlunos()<=20){
-            this.alunos[getNumAlunos()] = aluno;
-            setNumAluno();
-        }
-    }
-    public void setNumAluno() {
+    private void setNumAluno() {
         this.numAlunos ++;
     }
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
     public void setDiaDaSemana(int diaDaSemana) {
-        if(diaDaSemana>=MINIMO&&diaDaSemana<=DIA_MAXIMO){
+        if(diaDaSemana>=MINIMO&&diaDaSemana<=MAX_DIA){
             this.diaDaSemana = diaDaSemana;
         }
     }
     public void setTurno(int turno) {
-        if(turno>=MINIMO&&turno<=TURNO_MAXIMO){
+        if(turno>=MINIMO&&turno<=MAX_TURNO){
             this.turno = turno;
         }
     }
-    public void setCodTurma() {
+    private void setCodTurma() {
         this.codTurma = Integer.toString(getNivel())+getDiaDaSemana()+getTurno();
     }
     public void matricularAluno(String nomeDoAluno){
-        if(getNumAlunos()<20){
-            aluno[getNumAluno()] = new Aluno(nomeDoAluno, getCodTurma);
+        if(getNumAlunos()<MAX_ALUNOS){
+            this.alunos[getNumAlunos()] = new Aluno(nomeDoAluno, getCodTurma());
+            setNumAluno();
         }
     }
-
-    
+    public String relatorioTurma(){
+        String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";
+        for(int i = 0;i<this.getNumAlunos();i++){
+            relatorio += this.alunos[i].toString()+"/n";
+        }
+        return relatorio;
+    }
+    public double mediaNotaTurma(){
+        double somaNotaTotal = 0;
+        for(int i = 0;i<this.getNumAlunos();i++){
+            somaNotaTotal += this.alunos[i].notaTotal();
+        }
+        return somaNotaTotal/this.getNumAlunos();
+    }
+    public double mediaFrequenciaTurma(){
+        double somaFrequenciaTotal = 0;
+        for(int i = 0;i<this.getNumAlunos();i++){
+            somaFrequenciaTotal += this.alunos[i].getFrequenciaEmPorcentagem();
+        }
+        return somaFrequenciaTotal/this.getNumAlunos();
+    }
+    public Aluno alunoDestaque(){
+        Aluno destaque = this.alunos[getNumAlunos()-1];
+        for(int i = 0;i<(this.getNumAlunos()-1);i++){
+            if(this.alunos[i].getDesempenho()>destaque.getDesempenho()){
+                destaque = this.alunos[i];
+            }
+        }
+        return destaque;
+    }  
 }

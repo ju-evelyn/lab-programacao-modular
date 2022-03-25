@@ -10,8 +10,8 @@
  */
 
 public class Turma {
-    private Aluno alunos[] = new Aluno[20];
-    private int numAlunos = 1;
+    private Aluno alunos[];
+    private int numAlunos;
     private int nivel;
     private int diaDaSemana;
     private int turno;
@@ -19,7 +19,7 @@ public class Turma {
     public static final int MINIMO = 1;
     public static final int DIA_MAXIMO = 7;
     public static final int TURNO_MAXIMO = 3;
-
+    alunos[] = new Aluno[20];
     public Turma(){
         this.setNivel(MINIMO);
         this.setDiaDaSemana(MINIMO);
@@ -74,6 +74,11 @@ public class Turma {
     }
     public void setCodTurma() {
         this.codTurma = Integer.toString(getNivel())+getDiaDaSemana()+getTurno();
+    }
+    public void matricularAluno(String nomeDoAluno){
+        if(getNumAlunos()<20){
+            aluno[getNumAluno()] = new Aluno(nomeDoAluno, getCodTurma);
+        }
     }
 
     

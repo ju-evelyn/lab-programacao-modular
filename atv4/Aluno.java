@@ -5,7 +5,7 @@
  */
 public class Aluno {
     private String nome;
-    private boolean matriculado;
+    private String codTurma;
     private float nota[] = new float[4];
     private int numProva;
     private float frequencia;
@@ -13,8 +13,9 @@ public class Aluno {
     private boolean aprovado;
     public static final int NOTA_MAXIMA = 100;
     public static final int MAX_AULAS = 20;
-    public Aluno(String nome){
+    public Aluno(String nome, String codTurma){
         this.setNome(nome);
+        this.setCodTurma(codTurma);
     }
     public String getNome() {
         return nome;

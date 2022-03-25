@@ -8,7 +8,7 @@ public class Aluno {
     private String codTurma;
     private float[] nota;
     private int numProva;
-    private float frequencia;
+    private int frequencia;
     private double desempenho;
     private boolean aprovado;
     public static final int MIN_NOTA_APROVACAO = 60;

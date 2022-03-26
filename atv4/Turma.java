@@ -13,14 +13,14 @@ public class Turma {
         this.setNivel(MINIMO);
         this.setDiaDaSemana(MINIMO);
         this.setTurno(MINIMO);
-        this.setCodTurma();
+        this.definirCodTurma();
         this.alunos = new Aluno[MAX_ALUNOS];
     }
     public Turma(int nivel, int diaDaSemana, int turno){
         this.setNivel(nivel);
         this.setDiaDaSemana(diaDaSemana);
         this.setTurno(turno);
-        this.setCodTurma();
+        this.definirCodTurma();
         this.alunos = new Aluno[MAX_ALUNOS];
     }
     public Aluno getAlunos(int numAluno) {
@@ -57,7 +57,7 @@ public class Turma {
             this.turno = turno;
         }
     }
-    private void setCodTurma() {
+    private void definirCodTurma() {
         this.codTurma = Integer.toString(getNivel())+getDiaDaSemana()+getTurno();
     }
     public void matricularAluno(String nomeDoAluno){

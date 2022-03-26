@@ -65,21 +65,6 @@ public class Turma {
             this.alunos[getNumAlunos()] = new Aluno(nomeDoAluno, getCodTurma());
             setNumAluno();
         }
-        this.ordenarChamada();
-    }
-    private void ordenarChamada() {
-        for(int i = 0; i<this.getNumAlunos()-1; i++){
-            boolean isOrdenado = true;
-            for(int j = 0; j<(this.getNumAlunos()-1-i); j++){
-                if(this.getAlunos(j).getNome().compareToIgnoreCase(this.getAlunos(j+1).getNome())>0){
-                    Aluno aux = this.getAlunos(j);
-                    this.alunos[j] = this.alunos[j+1];
-                    this.alunos[j+1] = aux;
-                    isOrdenado = false;
-                }
-            }
-            if(isOrdenado)break;
-        }
     }
     public String relatorioTurma(){
         String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";

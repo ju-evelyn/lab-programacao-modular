@@ -1,102 +1,37 @@
-public class Turma {
-    private Aluno[] alunos;
-    private int numAlunos;
+public abstract class Turma{
+    public static String codTurma;
     private int nivel;
-    private int diaDaSemana;
-    private int turno;
-    private String codTurma;
-    public static final int MINIMO = 1;
-    public static final int MAX_DIA = 7;
-    public static final int MAX_TURNO = 3;
-    public static final int MAX_ALUNOS = 20;
-    public Turma(){
-        this.setNivel(MINIMO);
-        this.setDiaDaSemana(MINIMO);
-        this.setTurno(MINIMO);
-        this.setCodTurma();
-        this.alunos = new Aluno[MAX_ALUNOS];
-    }
-    public Turma(int nivel, int diaDaSemana, int turno){
-        this.setNivel(nivel);
-        this.setDiaDaSemana(diaDaSemana);
-        this.setTurno(turno);
-        this.setCodTurma();
-        this.alunos = new Aluno[MAX_ALUNOS];
-    }
-    public Aluno getAlunos(int numAluno) {
-        return alunos[numAluno];
-    }
-    public int getNumAlunos() {
-        return numAlunos;
-    }
+    private int numAtividades;
+    private double valorAtividade;
+    public static final int MAX_PONTOS = 100;
     public int getNivel() {
         return nivel;
     }
-    public int getDiaDaSemana() {
-        return diaDaSemana;
+    public int getNumAtividades() {
+        return numAtividades;
     }
-    public int getTurno() {
-        return turno;
+    public double getValorAtividade() {
+        return valorAtividade;
     }
-    public String getCodTurma() {
-        return codTurma;
-    }
-    private void setNumAluno() {
-        this.numAlunos ++;
-    }
-    public void setNivel(int nivel) {
+    private void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    public void setDiaDaSemana(int diaDaSemana) {
-        if(diaDaSemana>=MINIMO&&diaDaSemana<=MAX_DIA){
-            this.diaDaSemana = diaDaSemana;
-        }
+    public abstract void setCodTurma();
+    public void setNumAtividades(int numAtividades) {
+        this.numAtividades = numAtividades;
     }
-    public void setTurno(int turno) {
-        if(turno>=MINIMO&&turno<=MAX_TURNO){
-            this.turno = turno;
-        }
+    public void setValorAtividade() {
+        this.valorAtividade=Turma.MAX_PONTOS/this.getNumAtividades();
     }
-    private void setCodTurma() {
-        this.codTurma = Integer.toString(getNivel())+getDiaDaSemana()+getTurno();
+    public abstract boolean verificarAprovacao(double nota, double frequencia);
+    public abstract String emitirCertificado(String nome, double desempenho);
+    public Turma(int nivel, int numAtividades){
+        this.setNivel(nivel);
+        this.setCodTurma();
+        this.setNumAtividades(numAtividades);
+        this.setValorAtividade();
     }
-    public void matricularAluno(String nomeDoAluno){
-        if(getNumAlunos()<MAX_ALUNOS){
-            this.alunos[getNumAlunos()] = new Aluno(nomeDoAluno, getCodTurma());
-            setNumAluno();
-        }
-    }
-    public String relatorioTurma(){
-        String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";
-        for(int i = 0;i<this.getNumAlunos();i++){
-            relatorio += this.alunos[i].toString()+"/n";
-        }
-        return relatorio;
-    }
-    public double mediaNotaTurma(){
-        double somaNotaTotal = 0;
-        for(int i = 0;i<this.getNumAlunos();i++){
-            somaNotaTotal += this.alunos[i].notaTotal();
-        }
-        return somaNotaTotal/this.getNumAlunos();
-    }
-    public double mediaFrequenciaTurma(){
-        double somaFrequenciaTotal = 0;
-        for(int i = 0;i<this.getNumAlunos();i++){
-            somaFrequenciaTotal += this.alunos[i].frequenciaEmPorcentagem();
-        }
-        return somaFrequenciaTotal/this.getNumAlunos();
-    }
-    public Aluno alunoDestaque(){
-        Aluno destaque = this.alunos[getNumAlunos()-1];
-        for(int i = 0;i<(this.getNumAlunos()-1);i++){
-            if(this.alunos[i].getDesempenho()>destaque.getDesempenho()){
-                destaque = this.alunos[i];
-            }
-        }
-        return destaque;
-    }
-    public String toString(){
-        return "A turma "+this.getCodTurma()+"possui "+this.getNumAlunos()+" alunos e está no nível "+getNivel()+".";
+    public int getMaxFrequencia() {
+        return 0;
     }
 }

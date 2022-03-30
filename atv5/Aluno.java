@@ -55,10 +55,8 @@ public class Aluno {
     private void setAtvEntregue() {
         this.atvEntregue++;
     }
-    public void marcarPresenca() {
-        if(this.getFrequência()<this.getTurma().getMaxFrequencia()){
-            this.frequencia++;
-        }
+    public void setFrequencia() {
+        this.frequencia++;
     }
     private void atualizarDesempenho() {
         this.desempenho = ((80*notaTotal())+(20*frequenciaEmPorcentagem()))/100;
@@ -78,7 +76,7 @@ public class Aluno {
         return total;
     }
     public double frequenciaEmPorcentagem(){
-        return this.getFrequência()/this.getTurma().getMaxFrequencia();
+        return this.getFrequência()/ turma.getMaxFrequencia();
     }
     public Aluno(String nome, Turma turma){
         this.setNome(nome);

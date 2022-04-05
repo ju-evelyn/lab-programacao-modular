@@ -18,6 +18,9 @@ public class Autor{
     public void setNome(String nome){
         this.nome = nome;
     }
+    public void setLivros() {
+        this.livros = new Livro[100];
+    }
     private void aumentarNumLivros(){
         this.numLivros++;
     }

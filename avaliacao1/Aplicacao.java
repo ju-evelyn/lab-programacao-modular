@@ -9,8 +9,8 @@ public class Aplicacao {
     }
     public static void main(String[] args){
         Autor moderno = new Autor("Paulo Jose");
-        Livro romance = new Livro("Primeiro Amor", moderno, 250, 100.0);
-        Livro terror = new Livro("Dormindo Sozinho", moderno, 430, 100.0);
+        Livro romance = new LivroDigital("Primeiro Amor", moderno, 250, 100.0);
+        Livro terror = new LivroDigital("Dormindo Sozinho", moderno, 430, 100.0);
         moderno.incluirLivro(romance);
         moderno.incluirLivro(terror);
         double total = totalDeDireitos(moderno);

@@ -1,11 +1,11 @@
-public class Livro {
+public abstract class Livro {
     private static final double PCT_DIREITOS = 0.08;
     protected String titulo;
     protected Autor autor;
     protected int paginas;
     protected double precoBase;
     protected int[] avaliacoes;
-    private int numAvaliacoes;
+    protected int numAvaliacoes;
     public String getTitulo(){
         return this.titulo;
     }
@@ -33,15 +33,11 @@ public class Livro {
     public void setPaginas(int paginas){
         this.paginas = paginas;
     }
-    public void setPrecoBase(double precoBase){
-        this.precoBase = precoBase;
-    }
+    public abstract void setPrecoBase(double precoBase);
     private void setAvaliacoes(){
         this.avaliacoes = new int[100];
     }
-    public double precoVenda(){
-        return this.getPrecoBase()+this.direitosAutorais();
-    }
+    public abstract double precoVenda();
     public double direitosAutorais(){
         return this.getPrecoBase()*Livro.PCT_DIREITOS;
     }
@@ -64,11 +60,10 @@ public class Livro {
     private void aumentarNumAvaliacoes(){
         this.numAvaliacoes++;
     }
-    public Livro(String titulo, Autor autor, int paginas, double precoBase){
+    public Livro(String titulo, Autor autor, int paginas){
         this.setTitulo(titulo);
         this.setAutor(autor);
         this.setPaginas(paginas);
-        this.setPrecoBase(precoBase);
         this.setAvaliacoes();
     }
 }

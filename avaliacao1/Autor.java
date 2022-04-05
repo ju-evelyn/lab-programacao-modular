@@ -2,7 +2,6 @@ public class Autor{
     public String nome;
     private Livro[] livros;
     private int numLivros;
-
     public String getNome(){
         return this.nome;
     }
@@ -33,5 +32,6 @@ public class Autor{
     }
     public Autor(String nome){
         this.setNome(nome);
+        this.setLivros();
     }
 }

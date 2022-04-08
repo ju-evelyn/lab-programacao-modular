@@ -48,7 +48,13 @@ public abstract class Turma {
     public abstract void setNumAulas(int numAulas);
     protected abstract void setCodTurma();
     public abstract boolean verificarAprovacao(String nome);
-    public abstract String relatorio();
+    public String relatorio(){
+        String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";
+        for(int i = 0;i<this.getNumAlunos();i++){
+            relatorio += this.alunos[i].toString()+"/n";
+        }
+        return relatorio;
+    }
     public Turma(int nivel, int numAtividades){
         this.setNivel(nivel);
         this.setNumAtividades(numAtividades);

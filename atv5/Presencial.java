@@ -81,14 +81,6 @@ public class Presencial extends Turma {
         return false;
     }
     @Override
-    public String relatorio(){
-        String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";
-        for(int i = 0;i<this.getNumAlunos();i++){
-            relatorio += this.alunos[i].toString()+"/n";
-        }
-        return relatorio;
-    }
-    @Override
     public void setNumAulas(int numAulas) {
         this.numAulas = Presencial.MAX_AULAS;
     }

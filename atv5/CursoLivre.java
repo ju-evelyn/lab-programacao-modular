@@ -23,9 +23,16 @@ public class CursoLivre extends Turma {
         return false;
     }
     @Override
-    public String relatorio() {
-        // TODO Auto-generated method stub
-        return null;
+    public String relatorio(){
+        String relatorio = "Relatório geral Turma "+this.getCodTurma()+"/n";
+        for(int i = 0;i<this.getNumAlunos();i++){
+            if(this.alunos[i].isAprovado()){
+                return this.alunos[i].getNome()+" foi aprovado./n";
+            } else {
+                return this.alunos[i].getNome()+" foi reprovado./n";
+            }
+        }
+        return relatorio;
     }
     @Override
     public void setNumAulas(int numAulas) {

@@ -1,4 +1,5 @@
 public class Aluno {
+    //Atributos
     private String nome;
     private Turma turma;
     private double[] nota;
@@ -6,11 +7,53 @@ public class Aluno {
     private int frequencia;
     private double desempenho;
     private boolean aprovado;
+    private String certificado;
+    //construtor
     public Aluno(String nome, Turma turma){
         this.setNome(nome);
         this.setTurma(turma);
         this.nota = new double[turma.getNumAtividades()];
     }
+    //getters e setters com regras de negócio e/ou lógica específica
+    public double getNotaPorNumero(int numProva){
+        return nota[numProva];
+    }
+    public double getFrequenciaEmPorcentagem(){
+        return this.getFrequência()/turma.getNumAulas();
+    }
+    public double getDesempenhoEmPorcentagem(){
+        return this.getDesempenho()*100;
+    }
+    public void addNota(double nota) {
+        if(getNumProva()<turma.getNumAtividades() && nota<turma.getNotaAtividadeIndividual()){
+            this.nota[getNumProva()] = nota;
+            this.addNumProva();
+        }
+    }
+    private void addNumProva() {
+        this.numProva++;
+    }
+    public double getNotaTotal(){
+        double total = 0;
+        for(int i = 0;i<this.getNumProva();i++){
+            total += getNotaPorNumero(i);
+        }
+        return total;
+    }
+    //métodos de alteração de atributo
+    public void marcarPresencaEmAula() {
+        this.frequencia++;
+    }
+    public void atualizarDesempenho(){
+        this.desempenho = ((80*this.getNotaTotal())+(20*this.getFrequenciaEmPorcentagem()))/100;
+    }
+    public void atualizarAprovacao(){
+        this.aprovado = turma.verificarAprovacao(this.getNome());
+        if(aprovado){
+            this.setCertificado(turma.gerarCertificado(this.getNome()));
+        }
+    }
+    //getters e setters padrão
     public String getNome() {
         return nome;
     }
@@ -20,17 +63,11 @@ public class Aluno {
     public double[] getNota() {
         return nota;
     }
-    public double getNotaEspecifica(int numProva){
-        return nota[numProva];
-    }
     public int getNumProva() {
         return numProva;
     }
     public int getFrequência() {
         return this.frequencia;
-    }
-    public double getFrequenciaEmPorcentagem(){
-        return this.getFrequência()/turma.getNumAulas();
     }
     public double getDesempenho() {
         return desempenho;
@@ -39,42 +76,23 @@ public class Aluno {
         this.atualizarAprovacao();
         return aprovado;
     }
+    public String getCertificado() {
+        return certificado;
+    }
     private void setNome(String nome) {
         this.nome = nome;
     }
     public void setTurma(Turma turma) {
             this.turma = turma;
     }
-    public void addNota(float nota) {
-        if(getNumProva()<turma.getNumAtividades() && nota<Turma.MAX_NOTA){
-            this.nota[getNumProva()] = nota;
-            this.addNumProva();
-        }
-    }
-    private void addNumProva() {
-        this.numProva++;
-    }
-    public float notaTotal(){
-        float total = 0;
-        for(int i = 0;i<this.getNumProva();i++){
-            total += getNotaEspecifica(i);
-        }
-        return total;
-    }
-    public void marcarPresencaEmAula() {
-        this.frequencia++;
-    }
-    public void atualizarDesempenho(){
-        this.desempenho = ((80*this.notaTotal())+(20*this.getFrequenciaEmPorcentagem()))/100;
-    }
-    public void atualizarAprovacao(){
-        this.aprovado = turma.verificarAprovacao(this.getNome());
+    public void setCertificado(String certificado) {
+        this.certificado = certificado;
     }
     public String toString(){
         if(this.isAprovado()){
-            return this.nome+" foi aprovado e sua nota final foi "+this.notaTotal()+".";
+            return this.nome+" foi aprovado e sua nota final foi "+String.format("%.2d",this.getNotaTotal())+".";
         } else {
-            return this.nome+" foi reprovado e sua nota final foi "+this.notaTotal()+".";
+            return this.nome+" foi reprovado e sua nota final foi "+String.format("%.2d",this.getNotaTotal())+".";
         }
     }
 }
